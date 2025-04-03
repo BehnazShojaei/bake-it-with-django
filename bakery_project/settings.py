@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'bakeries',
+    'bakeries.apps.BakeriesConfig',
+    'django_browser_reload',
 ]
 
 MIDDLEWARE = [
@@ -48,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_browser_reload.middleware.BrowserReloadMiddleware',
 ]
 
 ROOT_URLCONF = 'bakery_project.urls'
@@ -55,7 +57,9 @@ ROOT_URLCONF = 'bakery_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+
+        'DIRS': [BASE_DIR / "bakery_project" / "templates"],
+
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -80,6 +84,8 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+
 
 
 # Password validation
@@ -116,8 +122,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'static'
+
+
+STATICFILES_DIRS = [
+    BASE_DIR / "bakery_project" / "static",
+]
+
+STATIC_URL = "static/"
+STATIC_ROOT = BASE_DIR / "bakery_project" / "staticfiles"
+
+MEDIA_URL = "media/"
+MEDIA_ROOT = BASE_DIR / "bakery_project" / "media"
 
 
 # Default primary key field type
